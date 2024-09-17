@@ -73,61 +73,61 @@ When a **ZED** joins the network, it typically associates with a nearby **router
 # In-depth Breakdown of Zigbee Coordinator (ZC)
 
 ## 1. Network Formation and Initialization:
-When the ZC powers up, it scans the 2.4 GHz ISM band (or other frequency bands such as 868 MHz and 915 MHz depending on regional regulations) to find the best available channel. This is crucial in environments where multiple wireless protocols coexist, such as Wi-Fi, Bluetooth, or other Zigbee networks. Interference from these protocols can degrade performance, so the ZC performs energy detection (ED) scans to measure the noise levels on each channel.
+When the **ZC** powers up, it scans the **2.4 GHz ISM band** (or other frequency bands such as **868 MHz** and **915 MHz** depending on regional regulations) to find the **best available channel**. This is crucial in environments where multiple wireless protocols coexist, such as **Wi-Fi**, **Bluetooth**, or other **Zigbee networks**. **Interference** from these protocols can degrade performance, so the **ZC** performs **energy detection (ED)** scans to measure the **noise levels** on each channel.
 
-Once a suitable channel is selected, the ZC assigns itself a unique PAN ID. This 16-bit identifier is crucial for ensuring devices can distinguish between different Zigbee networks operating in the same vicinity. The PAN ID is analogous to a Wi-Fi SSID in that it identifies the specific network the ZC is managing.
+Once a suitable channel is selected, the **ZC** assigns itself a unique **PAN ID**. This **16-bit identifier** is crucial for ensuring devices can distinguish between different Zigbee networks operating in the same vicinity. The **PAN ID** is analogous to a **Wi-Fi SSID** in that it identifies the specific network the **ZC** is managing.
 
-The network initialization process also involves setting up network parameters, such as beacon intervals, security settings (e.g., encryption keys), and addressing methods. Once the network is initialized, it enters a "discoverable" mode, allowing other devices to join.
+The network initialization process also involves setting up network parameters, such as **beacon intervals**, **security settings** (e.g., encryption keys), and **addressing methods**. Once the network is initialized, it enters a "**discoverable**" mode, allowing other devices to join.
 
 ## 2. Address Assignment and Network Expansion:
-Zigbee networks use two types of addresses: a 16-bit network address for local communication within the network and a 64-bit IEEE address for unique identification globally. The ZC allocates these 16-bit network addresses dynamically when a new device joins the network. The dynamic nature allows the ZC to manage the address space efficiently, avoiding conflicts and ensuring that every device has a unique identifier within the PAN.
+Zigbee networks use two types of addresses: a **16-bit network address** for local communication within the network and a **64-bit IEEE address** for unique identification globally. The **ZC** allocates these **16-bit network addresses** dynamically when a new device joins the network. This dynamic nature allows the **ZC** to manage the address space efficiently, avoiding conflicts and ensuring that every device has a unique identifier within the **PAN**.
 
-The ZC also maintains a list of all active devices in the network and their associated network addresses. This list is referred to as the Device Address Table and is essential for managing communication within the network, especially when devices are mobile or when nodes leave and rejoin the network. The ZC's ability to handle devices joining and leaving dynamically is part of what makes Zigbee suitable for scalable, resilient networks.
+The **ZC** also maintains a list of all active devices in the network and their associated network addresses. This list is referred to as the **Device Address Table** and is essential for managing communication within the network, especially when devices are **mobile** or when nodes leave and rejoin the network. The **ZC's** ability to handle devices joining and leaving dynamically is part of what makes Zigbee suitable for **scalable** and **resilient networks**.
 
-For larger networks, the ZC can delegate addressing authority to Zigbee Routers (ZR), allowing them to handle the local assignment of addresses to their own child devices, reducing the load on the ZC and enabling larger networks to scale without performance degradation.
+For larger networks, the **ZC** can delegate addressing authority to **Zigbee Routers (ZR)**, allowing them to handle the local assignment of addresses to their own child devices, reducing the load on the **ZC** and enabling larger networks to scale without performance degradation.
 
 ## 3. Routing and Network Management:
-Zigbee is built on a mesh networking architecture, which means that the ZC is not a central point of failure for communication after the network is established. However, the ZC plays a pivotal role in network topology management. It maintains a routing table and keeps track of the network map, which includes knowing which devices are connected to which routers and the optimal paths for communication.
+Zigbee is built on a **mesh networking architecture**, which means that the **ZC** is not a central point of failure for communication after the network is established. However, the **ZC** plays a pivotal role in **network topology management**. It maintains a **routing table** and keeps track of the **network map**, which includes knowing which devices are connected to which routers and the optimal paths for communication.
 
-Zigbee uses an algorithm based on Ad-hoc On-demand Distance Vector (AODV) routing, which allows devices to dynamically discover routes to other devices as needed. The ZC helps initiate this process and maintains routing information for efficient data transfer. If the network topology changes (e.g., a router goes offline), the ZC can help manage route updates to ensure continued communication.
+Zigbee uses an algorithm based on **Ad-hoc On-demand Distance Vector (AODV)** routing, which allows devices to dynamically discover routes to other devices as needed. The **ZC** helps initiate this process and maintains routing information for **efficient data transfer**. If the network topology changes (e.g., a router goes offline), the **ZC** can help manage route updates to ensure continued communication.
 
-The ZC also monitors node associations, keeping track of which devices are currently active in the network. This allows the ZC to handle power management more effectively, ensuring that sleeping devices (Zigbee End Devices, ZEDs) can still communicate when they wake up.
+The **ZC** also monitors **node associations**, keeping track of which devices are currently active in the network. This allows the **ZC** to handle **power management** more effectively, ensuring that **sleeping devices** (Zigbee **End Devices**, **ZEDs**) can still communicate when they wake up.
 
 ## 4. Security and Key Distribution:
-Security in Zigbee networks is based on the Advanced Encryption Standard (AES-128), ensuring secure communication between devices. The ZC is responsible for generating and distributing two critical types of keys:
+Security in Zigbee networks is based on the **Advanced Encryption Standard (AES-128)**, ensuring **secure communication** between devices. The **ZC** is responsible for generating and distributing two critical types of keys:
 
-- **Network Key:** A shared key used for encrypting all messages at the network layer. This key is distributed to all devices in the network when they join. The ZC can update this key periodically to enhance security.
-- **Link Keys:** Used for encrypting communication between two devices at the application layer. These keys are not shared network-wide but are specific to the communicating devices. The ZC can help with key establishment protocols (such as using certificates or pre-shared keys) when devices authenticate each other.
+- **Network Key:** A shared key used for encrypting all messages at the network layer. This key is distributed to all devices in the network when they join. The **ZC** can update this key periodically to enhance security.
+- **Link Keys:** Used for encrypting communication between two devices at the application layer. These keys are not shared network-wide but are specific to the communicating devices. The **ZC** can help with **key establishment protocols** (such as using certificates or pre-shared keys) when devices authenticate each other.
 
-The ZC acts as a Trust Center (TC), which manages the distribution of these keys and enforces policies such as device authentication and message integrity checking. When a new device tries to join the network, the ZC verifies its credentials before granting access and distributing the necessary keys.
+The **ZC** acts as a **Trust Center (TC)**, which manages the distribution of these keys and enforces policies such as **device authentication** and **message integrity checking**. When a new device tries to join the network, the **ZC** verifies its credentials before granting access and distributing the necessary keys.
 
-Additionally, Zigbee allows for key refreshes where the network key can be updated without needing to rejoin devices, which enhances the overall security posture of the network.
+Additionally, Zigbee allows for **key refreshes**, where the **network key** can be updated without needing to rejoin devices, which enhances the overall **security posture** of the network.
 
 ## 5. Backup, Recovery, and Redundancy:
-Since the ZC is the only device responsible for forming and initializing the network, it becomes critical to plan for failure scenarios. Zigbee networks can support backup and restore functionality, where the ZC stores essential network information such as:
+Since the **ZC** is the only device responsible for forming and initializing the network, it becomes critical to plan for **failure scenarios**. Zigbee networks can support **backup and restore** functionality, where the **ZC** stores essential network information such as:
 
-- Device Address Table
-- Routing Information
-- Security Keys
-- Network Parameters (e.g., PAN ID, channel)
+- **Device Address Table**
+- **Routing Information**
+- **Security Keys**
+- **Network Parameters** (e.g., **PAN ID**, channel)
 
-If the ZC goes offline or is replaced (e.g., due to a hardware failure), a backup of this data can be used to restore the network without requiring all devices to rejoin. This is particularly useful for large networks where manually re-pairing each device would be impractical.
+If the **ZC** goes offline or is replaced (e.g., due to a hardware failure), a backup of this data can be used to restore the network without requiring all devices to rejoin. This is particularly useful for large networks where manually re-pairing each device would be impractical.
 
-However, in some cases, restoring the ZC might not be immediate. Zigbee's mesh architecture ensures that communication can continue between devices through routers, even in the absence of the ZC. This decentralized routing helps avoid network failure due to a single point of failure.
+However, in some cases, restoring the **ZC** might not be immediate. Zigbee's **mesh architecture** ensures that communication can continue between devices through **routers**, even in the absence of the **ZC**. This **decentralized routing** helps avoid network failure due to a single point of failure.
 
 ## 6. Coordinator's Role in Managing Large-Scale Networks:
-In a large Zigbee network, the ZC can become a bottleneck if too many devices attempt to communicate through it. To address this, Zigbee networks can be designed to offload tasks to Zigbee Routers. For instance, routers can handle local device joining, routing, and some network management, significantly reducing the workload on the ZC.
+In a large Zigbee network, the **ZC** can become a **bottleneck** if too many devices attempt to communicate through it. To address this, Zigbee networks can be designed to offload tasks to **Zigbee Routers**. For instance, routers can handle **local device joining**, **routing**, and some **network management**, significantly reducing the workload on the **ZC**.
 
-For very large networks, Zigbee Pro introduces network segmentation, where the network is broken into smaller, manageable segments. The ZC coordinates communication between these segments, optimizing network performance and scalability.
+For very large networks, **Zigbee Pro** introduces **network segmentation**, where the network is broken into smaller, manageable segments. The **ZC** coordinates communication between these segments, optimizing network **performance** and **scalability**.
 
-Network scalability is a critical feature in Zigbee systems, where hundreds or even thousands of devices may need to coexist. The ZC facilitates this by:
+Network **scalability** is a critical feature in Zigbee systems, where hundreds or even thousands of devices may need to coexist. The **ZC** facilitates this by:
 
-- Optimizing routing to avoid congestion
-- Managing security at scale
-- Supporting multi-hop communication via routers
+- Optimizing **routing** to avoid congestion
+- Managing **security** at scale
+- Supporting **multi-hop communication** via routers
 
 ## 7. Zigbee Green Power and Coordinator:
-In energy-constrained environments, such as where devices are powered by energy harvesting (e.g., solar), Zigbee introduced the Green Power feature. The ZC supports Green Power Devices (GPDs), which operate with extremely low power and may not be able to handle the full Zigbee stack. The ZC and routers help integrate these GPDs into the network by handling communication for them.
+In **energy-constrained environments**, such as where devices are powered by energy harvesting (e.g., solar), Zigbee introduced the **Green Power** feature. The **ZC** supports **Green Power Devices (GPDs)**, which operate with **extremely low power** and may not be able to handle the full Zigbee stack. The **ZC** and **routers** help integrate these **GPDs** into the network by handling communication for them.
 
 ---
 
