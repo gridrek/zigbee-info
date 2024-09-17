@@ -1,4 +1,4 @@
-# zigbee-info
+[# zigbee-info](https://www.emcu-homeautomation.org/wp-content/uploads/2021/06/immagine-111.png)
 
 # Zigbee Coordinator (ZC)
 The **Zigbee Coordinator (ZC)** is the most critical device in a **Zigbee network**. It plays several key roles:
