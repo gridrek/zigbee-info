@@ -3,22 +3,22 @@
 # Zigbee Coordinator (ZC)
 The **Zigbee Coordinator (ZC)** is the most critical device in a **Zigbee network**. It plays several key roles:
 
-## Network Formation:
+### Network Formation:
 The **ZC** is the device that starts and organizes the Zigbee network. When powered on, it scans the radio environment for a suitable channel to avoid interference with other wireless systems (such as **Wi-Fi** or **Bluetooth**). Once it selects a channel, the **ZC** establishes a unique **Personal Area Network Identifier (PAN ID)** for the network. The **PAN ID** acts like a unique identifier for the network, distinguishing it from other Zigbee networks in the same area.
 
-## Address Assignment:
+### Address Assignment:
 Every device in the Zigbee network needs a unique address. The **ZC** assigns a **16-bit network address** to each new device joining the network. The network uses a combination of these short addresses for communication, while the **64-bit IEEE address** is used globally to identify the device.
 
-## Routing and Management:
+### Routing and Management:
 While the **ZC** doesn't handle all routing on its own (routers and end devices also participate in routing), it plays an essential role in maintaining the overall structure of the network. The **ZC** keeps track of the **routing tables**, node associations, and the overall **topology** of the network. It also ensures that the network's integrity is maintained over time, such as when nodes join or leave the network, or when the topology changes due to mobility or failures.
 
-## Security Management:
+### Security Management:
 Zigbee supports **encryption** and **secure key exchange** to protect communication. The **ZC** is responsible for generating and distributing the **network-wide encryption keys**. This key is shared among devices in the network to encrypt the data they exchange. It can also authenticate devices that request to join the network to ensure that only **authorized devices** can participate.
 
-## Backup and Recovery:
+### Backup and Recovery:
 The **ZC** can store a **backup** of the network settings, such as **device addresses** and **routing information**. If the **ZC** goes down or is replaced, it can restore the network from the backup. This prevents the entire network from being disrupted in case of failure.
 
-## One Coordinator per Network:
+### One Coordinator per Network:
 The architecture allows only **one ZC per Zigbee network**, and it acts as the **root** of the network tree. It can communicate with both **routers** and **end devices**. While **ZC** is critical for forming the network, once the network is formed, other routers can take over **routing duties**, and the **ZC** is not required for day-to-day operation (although it must remain active for certain **management tasks**).
 
 ---
@@ -26,22 +26,22 @@ The architecture allows only **one ZC per Zigbee network**, and it acts as the *
 # Zigbee Router (ZR)
 A **Zigbee Router (ZR)** enhances **network scalability**, extends coverage, and provides **resilience** through its role in **routing data** across the network.
 
-## Mesh Networking:
+### Mesh Networking:
 **ZR** devices allow Zigbee to support **mesh networking**, where devices can forward messages on behalf of others. This means that even if two devices are too far apart to communicate directly, routers can **relay the data**, ensuring the entire network stays connected.
 
-## Range Extension:
+### Range Extension:
 By relaying messages, **ZRs** effectively extend the **range** of the Zigbee network. This allows devices that are physically far apart to communicate by using intermediate routers. For instance, in a large home, routers can be placed at various points to ensure that all **Zigbee devices** (such as **smart lights** or **sensors**) can connect, even if they're not in direct range of the **coordinator**.
 
-## Energy Consumption:
+### Energy Consumption:
 **ZRs** are typically always powered on (**non-sleeping**), as they need to be available to **forward messages** from other devices. Unlike **end devices**, which can enter **sleep modes** to save energy, routers need a stable power source. This makes **ZRs** ideal for **fixed infrastructure devices**, such as **smart plugs**, which can function continuously without needing **battery replacements**.
 
-## Routing Table Management:
+### Routing Table Management:
 Each **ZR** maintains a **routing table**, which contains information about the best paths to different devices in the network. Zigbee uses an algorithm similar to **Ad-hoc On-demand Distance Vector (AODV)** to dynamically determine routes, minimizing delays and avoiding congestion.
 
-## Redundancy and Fault Tolerance:
+### Redundancy and Fault Tolerance:
 Since routers relay messages, the network is resilient to **single-point failures**. If one router goes offline, the **mesh network** can automatically reroute messages through other available routers. This decentralized routing system improves the overall **reliability** of the Zigbee network, especially in large or complex environments.
 
-## Joining and Device Association:
+### Joining and Device Association:
 When new Zigbee devices want to join the network, they can associate through either the **ZC** or a **ZR**. The router can help manage new devices by assigning them a **network address** and forwarding this information back to the coordinator. This **decentralized joining process** ensures that new devices can join the network without overwhelming the **coordinator**.
 
 ---
@@ -49,23 +49,23 @@ When new Zigbee devices want to join the network, they can associate through eit
 # Zigbee End Device (ZED)
 The **Zigbee End Device (ZED)** is designed for **simplicity** and **power efficiency**, fulfilling its role by performing specialized tasks without participating in routing or relaying data for other devices.
 
-## Simplicity and Power Efficiency:
+### Simplicity and Power Efficiency:
 **ZEDs** are typically **low-power devices** designed to operate for extended periods on **batteries**. Examples of **ZEDs** include **sensors**, **actuators**, and **remote controls**. To conserve energy, these devices can enter **sleep mode** when not actively transmitting or receiving data. When in sleep mode, **ZEDs** do not participate in **network routing**.
 
-## Dependency on Coordinators and Routers:
+### Dependency on Coordinators and Routers:
 Since **ZEDs** do not relay messages, they depend on nearby **routers** or the **ZC** for communication. When a **ZED** needs to send or receive data, it first communicates with a **router** or the **coordinator**, which then handles relaying the message. For example, a **Zigbee temperature sensor (ZED)** might wake up periodically, send a temperature reading to a nearby **router (ZR)**, and then go back to sleep.
 
-## Polling Mechanism:
+### Polling Mechanism:
 Since **ZEDs** sleep to conserve power, they need a mechanism to check for incoming messages. This is achieved through a **polling mechanism**, where the **ZED** wakes up at intervals and asks the parent device (a **ZR** or **ZC**) if any messages are waiting for it. This minimizes energy consumption while ensuring that important data is not missed.
 
-## Device Types:
+### Device Types:
 **ZEDs** are often **small** and **low-cost**, and they serve specific roles such as:
 
 - **Sensors:** Devices that collect environmental data (e.g., **temperature**, **humidity**, **motion**).
 - **Controllers:** Devices like **remote controls** that send commands (e.g., turning on lights).
 - **Actuators:** Devices that perform an action (e.g., **locking a door** or **turning on a fan**) when commanded.
 
-## Network Joining:
+### Network Joining:
 When a **ZED** joins the network, it typically associates with a nearby **router** or the **ZC**. Once connected, it receives a **unique network address**. **ZEDs** do not need to maintain a **routing table** or perform complex **network management** tasks, which reduces their complexity and power needs.
 
 ---
