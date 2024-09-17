@@ -134,11 +134,11 @@ In **energy-constrained environments**, such as where devices are powered by ene
 # Zigbee Router (ZR) In-depth
 
 ## 1. Mesh Networking in Detail:
-Zigbee operates using a mesh networking architecture, which is highly scalable and fault-tolerant. The Zigbee Router (ZR) is central to this, as it facilitates multi-hop communication between devices. Here’s how ZRs contribute:
+Zigbee operates using a mesh networking architecture, which is highly scalable and fault-tolerant. The **Zigbee Router (ZR)** is central to this, as it facilitates **multi-hop communication** between devices. Here’s how ZRs contribute:
 
-- **Message Forwarding:** In a Zigbee mesh, devices do not need to communicate directly with the Zigbee Coordinator (ZC) or with each other. Instead, they can use routers to forward messages. ZRs relay these messages from one device to another, which allows communication over long distances and through obstacles like walls or floors.
+- **Message Forwarding:** In a Zigbee mesh, devices do not need to communicate directly with the **Zigbee Coordinator (ZC)** or with each other. Instead, they can use routers to forward messages. ZRs relay these messages from one device to another, which allows communication over long distances and through obstacles like walls or floors.
 
-- **Path Discovery:** Zigbee uses an Ad-hoc On-demand Distance Vector (AODV)-based routing protocol. ZRs play an active role in discovering paths between devices. When a device wants to send a message to another device that isn’t in direct range, the ZR helps by finding the most efficient route based on the network topology. ZRs maintain routing tables with information about available paths, ensuring that the best route is chosen dynamically.
+- **Path Discovery:** Zigbee uses an **Ad-hoc On-demand Distance Vector (AODV)**-based routing protocol. ZRs play an active role in discovering paths between devices. When a device wants to send a message to another device that isn’t in direct range, the ZR helps by finding the most efficient route based on the network topology. ZRs maintain **routing tables** with information about available paths, ensuring that the best route is chosen dynamically.
 
 - **Dynamic Routing:** If the physical layout of the network changes—such as when devices are moved or a router goes offline—the ZR updates its routing table and helps discover new routes. This dynamic nature ensures the network remains operational without requiring manual intervention.
 
@@ -150,23 +150,23 @@ In small Zigbee networks, devices can communicate directly with the coordinator.
 - **Supporting Dense Networks:** ZRs allow Zigbee to scale to hundreds or thousands of devices by distributing the communication load. Without routers, all devices would need to communicate directly with the ZC, which could create a bottleneck. ZRs distribute the load, enabling more devices to join the network without overwhelming the coordinator.
 
 ## 3. Energy Consumption and Power Requirements:
-A key difference between Zigbee End Devices (ZEDs) and Zigbee Routers (ZRs) lies in their power requirements.
+A key difference between **Zigbee End Devices (ZEDs)** and **Zigbee Routers (ZRs)** lies in their **power requirements**.
 
 - **Non-Sleeping Devices:** Zigbee Routers must remain powered on at all times to forward messages. This means that ZRs are not energy-constrained devices and typically need a stable, reliable power source (e.g., being plugged into the mains). Devices like smart plugs, light bulbs, or security systems often serve as ZRs because they are always connected to power and can support continuous operation.
 
-- **Energy Trade-Off:** In contrast, ZEDs can go into sleep mode to save power, especially in battery-operated devices like sensors. However, ZEDs depend on nearby routers to relay their messages, as they don’t have the capability to forward messages or stay active for long periods. The presence of always-on routers ensures that these low-power devices can still communicate efficiently while conserving energy.
+- **Energy Trade-Off:** In contrast, ZEDs can go into **sleep mode** to save power, especially in battery-operated devices like sensors. However, ZEDs depend on nearby routers to relay their messages, as they don’t have the capability to forward messages or stay active for long periods. The presence of always-on routers ensures that these low-power devices can still communicate efficiently while conserving energy.
 
 ## 4. Routing Table Management and Path Optimization:
 Zigbee Routers maintain routing tables that store information about the best paths to other devices in the network. Routing tables help routers quickly determine the next hop for a message to reach its destination, thus optimizing communication.
 
-- **AODV Routing Algorithm:** The Ad-hoc On-demand Distance Vector (AODV) routing algorithm used by Zigbee dynamically determines routes based on distance and network topology. When a message needs to be sent, the router checks its routing table for the most efficient path. If no path is found, the router will initiate a route discovery process to find one.
+- **AODV Routing Algorithm:** The Ad-hoc On-demand Distance Vector (AODV) routing algorithm used by Zigbee dynamically determines routes based on distance and network topology. When a message needs to be sent, the router checks its routing table for the most efficient path. If no path is found, the router will initiate a **route discovery** process to find one.
 
-- **Route Discovery Process:** During route discovery, a ZR broadcasts route request (RREQ) packets to neighboring devices. These neighbors pass the request further until it reaches the destination. Once the route is found, a route reply (RREP) packet is sent back along the reverse path to confirm the route. After the path is established, ZRs maintain route freshness to ensure optimal performance.
+- **Route Discovery Process:** During route discovery, a ZR broadcasts **route request (RREQ)** packets to neighboring devices. These neighbors pass the request further until it reaches the destination. Once the route is found, a **route reply (RREP)** packet is sent back along the reverse path to confirm the route. After the path is established, ZRs maintain **route freshness** to ensure optimal performance.
 
 - **Congestion and Delay Minimization:** The routing table also helps minimize network congestion by distributing data across multiple routes. If a particular route becomes congested, the router can reroute data via a less congested path, minimizing delays and ensuring smooth communication.
 
 ## 5. Redundancy and Fault Tolerance:
-One of the key benefits of Zigbee’s mesh architecture is fault tolerance, largely enabled by ZRs.
+One of the key benefits of Zigbee’s **mesh architecture** is fault tolerance, largely enabled by ZRs.
 
 - **Automatic Rerouting:** If a router goes offline (e.g., due to a power failure), the Zigbee network automatically finds an alternative path through other ZRs. This self-healing feature makes Zigbee networks highly reliable, especially in environments where devices may frequently join and leave the network.
 
@@ -175,18 +175,19 @@ One of the key benefits of Zigbee’s mesh architecture is fault tolerance, larg
 - **Distributed Load:** By distributing the task of message forwarding across multiple routers, the network avoids overloading any single point. This distributed nature also improves data throughput and network robustness, as traffic can be dynamically balanced across the network.
 
 ## 6. Joining and Device Association:
-Zigbee Routers play a key role in allowing new devices to join the network, a process known as device association.
+Zigbee Routers play a key role in allowing new devices to join the network, a process known as **device association**.
 
-- **Association via ZR:** When a new device (like a sensor or light) tries to join the network, it does not need to communicate directly with the coordinator. It can join through the nearest ZR. The router will assign a 16-bit network address to the new device and forward this information to the coordinator. This decentralized process lightens the load on the ZC, allowing it to handle more devices without becoming a bottleneck.
+- **Association via ZR:** When a new device (like a sensor or light) tries to join the network, it does not need to communicate directly with the coordinator. It can join through the nearest ZR. The router will assign a **16-bit network address** to the new device and forward this information to the coordinator. This decentralized process lightens the load on the ZC, allowing it to handle more devices without becoming a bottleneck.
 
-- **Parent-Child Relationship:** Once a ZR allows a new device to join the network, it acts as the device’s parent. This parent-child relationship is crucial for low-power devices (ZEDs), which need to conserve energy. The ZR will store messages for these devices while they are in sleep mode and deliver them when they wake up. This mechanism ensures that energy-constrained devices can function efficiently without draining their batteries.
+- **Parent-Child Relationship:** Once a ZR allows a new device to join the network, it acts as the device’s **parent**. This parent-child relationship is crucial for low-power devices (ZEDs), which need to conserve energy. The ZR will store messages for these devices while they are in **sleep mode** and deliver them when they wake up. This mechanism ensures that energy-constrained devices can function efficiently without draining their batteries.
 
 ## 7. Network Maintenance and Beaconing:
-Zigbee Routers assist in network maintenance through the use of beacons and other network maintenance messages.
+Zigbee Routers assist in network maintenance through the use of **beacons** and other network maintenance messages.
 
-- **Beaconing:** Zigbee Routers periodically transmit beacon frames, which serve to synchronize devices in the network, inform devices about the network structure, and assist in keeping routing tables up to date. Beacons contain important network parameters, such as the PAN ID and the network addresses of nearby devices.
+- **Beaconing:** Zigbee Routers periodically transmit **beacon frames**, which serve to **synchronize devices** in the network, inform devices about the network structure, and assist in keeping routing tables up to date. Beacons contain important network parameters, such as the **PAN ID** and the **network addresses** of nearby devices.
 
 - **Network Health Monitoring:** By sending and receiving beacons, ZRs can monitor the health of the network, identify network changes (e.g., new routers joining or leaving), and update their routing tables accordingly. This ongoing maintenance ensures that the mesh network remains stable and efficient.
+
 
 ---
 
